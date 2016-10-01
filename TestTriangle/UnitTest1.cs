@@ -8,32 +8,17 @@ namespace TestTriangle
     public class UnitTest1
     {
 
-
         public void TestHerons(Triangle tr, double ExectedResult)
         {
             var result = tr.CalculationAreaByHeron();
-           
 
             Assert.AreEqual(ExectedResult, result, 10e-2);
         }
 
-        //public void TestTriangleDoesNot(Triangle tr, double ExectedAngleA, double ExectedAngleB=0, double ExectedAngleC=0, double ExectedA =0, double ExectedB= 0, double ExectedC= 0)
-        //{
-            
-
-        //    Assert.AreEqual(ExectedAngleA, tr.AngleA, 10e-2);
-        //    Assert.AreEqual(ExectedAngleB, tr.AngleB, 10e-2);
-        //    Assert.AreEqual(ExectedAngleC, tr.AngleC, 10e-2);
-        //    Assert.AreEqual(ExectedA, tr.SideA, 10e-2);
-        //    Assert.AreEqual(ExectedB, tr.SideB, 10e-2);
-        //    Assert.AreEqual(ExectedC, tr.SideC, 10e-2);
-        //}
-
-
         [TestMethod]
         public void TriangleTestCalculationOnTwoSidesAndAngle()
         {
-            Triangle tr = new Triangle(a: 14, b: 25, angleC:30);
+            Triangle tr = Triangle.TwoSidesAndAngle(a: 14, b: 25, angleC:30);
             TestHerons(tr, 87.50);
            
             Assert.AreEqual(28.53, tr.AngleA, 10e-2);
@@ -45,7 +30,7 @@ namespace TestTriangle
         [TestMethod]
         public void TriangleTestCalculationOnSideAndTwoAngles()
         {
-            Triangle tr = new Triangle(a: 12, angleB: 25, angleC: 15);
+            Triangle tr = Triangle.SideAndTwoAngles(a: 12, angleB: 25, angleC: 15);
             TestHerons(tr,12.25);
             
             Assert.AreEqual(140, tr.AngleA, 10e-2);
@@ -57,7 +42,7 @@ namespace TestTriangle
         [TestMethod]
         public void TriangleTestCalculationOnThreeSides()
         {
-            Triangle tr = new Triangle(a: 3, b: 5, c: 6);
+            Triangle tr = Triangle.ThreeSides(3, 5, 6);
             TestHerons(tr, 7.48);
 
             Assert.AreEqual(29.93, tr.AngleA, 10e-2);
@@ -68,32 +53,31 @@ namespace TestTriangle
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
-        public void Exceprion2_FailTest_TriangleDoesNotExist()
+        public void Exceprion_FailTest_TriangleDoesNotExist()
         {
-            Triangle tr = new Triangle(a: 3, b: 5, c: 15);
-
+            Triangle tr = Triangle.ThreeSides(3,5,15);
         }
 
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
-        public void NegativeSideA()
+        public void TriangleDoesNotExistBecauseNegativeSideA()
         {
-            Triangle tr = new Triangle(a: -15, b: 5, c: 15);
+            Triangle tr = Triangle.ThreeSides(-15, 5, 15);
         }
 
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
-        public void NegativeAngle()
+        public void TriangleDoesNotExistBecauseNegativeAngle()
         {
-            Triangle tr = new Triangle(a: 4, b: 5, angleC: -15);
+            Triangle tr = Triangle.TwoSidesAndAngle(a: 4, b: 5, angleC: -15);
         }
 
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
-        public void FunctionalTestTriangleDoesNotOrNegativeSide()
+        public void FunctionalTestTriangleDoesNotExistOrNegativeSide()
         {
             var rnd = new Random(1);
             for (int i = 0; i < 100; i++)
@@ -102,10 +86,9 @@ namespace TestTriangle
                 var b = rnd.NextDouble() * 10-20;
                 var c = rnd.NextDouble() * 10-20;
 
-                Triangle tr = new Triangle(a: a, b: b, c: c);
+                Triangle tr = Triangle.ThreeSides(a: a, b: b, c: c);
             }
         }
-
 
     }
 }
