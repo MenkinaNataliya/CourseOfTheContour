@@ -6,10 +6,22 @@ using System.Threading.Tasks;
 
 namespace barley_break
 {
+
+    class Coordinate {
+        public int x { get; set; }
+        public int y { get; set; }
+
+        public Coordinate(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
     public class Game
     {
-        private int[,] field;
+        private int[,] Field;
         private int SizeField;
+        private Coordinate[] ChipLayout;
 
         public Game(int[] args)
         {
@@ -20,32 +32,22 @@ namespace barley_break
             else
             {
                 SizeField = (int)Math.Sqrt(args.Length);
-                field = new int[SizeField, SizeField];
+                Field = new int[SizeField, SizeField];
+                ChipLayout = new Coordinate[args.Length];
 
                 var rnd = new Random(1);
 
+                int k = 0;
                 for (int i = 0; i < SizeField; i++)
                     for (int j = 0; j < SizeField; j++)
-                        field[i, j] = AssignmentWithoutRpetition(args);
+                    {
+                        Field[i, j] = args[k];
+                        Coordinate coord = new Coordinate(i, j);
+                        ChipLayout[args[k]] = coord;
+
+                        k++;
+                    }
             }
-        }
-
-
-        private int AssignmentWithoutRpetition(int[] args)
-        {
-
-            var rnd = new Random();
-            var value = args[rnd.Next(0, args.Length)];
-
-
-            for (int i = 0; i < 100; i++)
-            {
-                value = args[rnd.Next(0, args.Length)];
-                if (GetLocation(value) == null)
-                    return value;
-
-            }
-            return 0;
         }
 
         public int this[int x, int y]
@@ -53,30 +55,23 @@ namespace barley_break
             get
             {
                 if (x >= SizeField || y >= SizeField) throw new ArgumentException("Incorrectly sets the index");
-                else return field[x, y];
+                else return Field[x, y];
             }
             private set
             {
                 if (x >= SizeField || y >= SizeField) throw new ArgumentException("Incorrectly sets the index");
-                else field[x, y] = value;
+                else Field[x, y] = value;
             }
         }
 
 
         public int[] GetLocation(int value)
         {
-
-            for (int i = 0; i < SizeField; i++)
-                for (int j = 0; j < SizeField; j++)
-                {
-                    if (field[i, j] == value)
-                    {
-                        int[] res = { i, j };
-                        return res;
-                    }
-                }
-            return null;
-
+            if (value >= SizeField* SizeField) throw new ArgumentException("Incorrectly sets the value"); 
+            int[] result = new int[2];
+            result[0] = ChipLayout[value].x;
+            result[1] = ChipLayout[value].y;
+            return result;
         }
 
         public void Shift(int value)
@@ -92,8 +87,8 @@ namespace barley_break
              || Math.Abs(x - xZero) == 0 && Math.Abs(y - yZero) == 1)
             {
 
-                field[x, y] = 0;
-                field[xZero, yZero] = value;
+                Field[x, y] = 0;
+                Field[xZero, yZero] = value;
 
             }
             else throw new ArgumentException("Zero is not on an adjacent site");

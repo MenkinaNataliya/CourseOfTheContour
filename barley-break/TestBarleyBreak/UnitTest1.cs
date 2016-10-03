@@ -7,12 +7,20 @@ namespace TestBarleyBreak
     [TestClass]
     public class UnitTest1
     {
+
+        Game field;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15, 0 };
+            field = new Game(tag);
+        }
+
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void GoingBeyondBoundsOfarray()
         {
-            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
-            Game field = new Game(tag);
             field.GetLocation(field[4, 1]);
         }
 
@@ -27,8 +35,6 @@ namespace TestBarleyBreak
 
         [TestMethod]
         public void SuccessfulDeterminingElementCoordinates() {
-            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
-            Game field = new Game(tag);
 
             int[] res = field.GetLocation(5);
 
@@ -36,37 +42,25 @@ namespace TestBarleyBreak
 
         }
 
-
+        [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void DisastrousDeterminingElementCoordinates() {
-            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
-            Game field = new Game(tag);
-            int[] res = field.GetLocation(9);
-            Assert.AreEqual(null, res);
+
+            int[] res = field.GetLocation(19);
         }
 
         [TestMethod]
         public void SuccessfulMovementOfChips()
         {
-            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
-            Game field = new Game(tag);
-
-            int[] coordinate;
-            int[] coordinateZero ;
-            int x;
-            int y;
-            int xZero;
-            int yZero;
-
-            for (int i = 1; i < tag.Length; i++)
+            for (int i = 1; i < 16; i++)
             {
-                coordinate = field.GetLocation(i);
-                x = coordinate[0];
-                y = coordinate[1];
+                int[] coordinate = field.GetLocation(i);
+                int x = coordinate[0];
+                int y = coordinate[1];
 
-                coordinateZero = field.GetLocation(0);
-                xZero = coordinateZero[0];
-                yZero = coordinateZero[1];
+                int[] coordinateZero = field.GetLocation(0);
+                int xZero = coordinateZero[0];
+                int yZero = coordinateZero[1];
 
                 if (Math.Abs(x - xZero) == 1 && Math.Abs(y - yZero) == 0
                     || Math.Abs(x - xZero) == 0 && Math.Abs(y - yZero) == 1)
@@ -82,21 +76,16 @@ namespace TestBarleyBreak
         [TestMethod]
         public void DisastrousMovementOfChips()
         {
-            int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8, 0 };
-            Game field = new Game(tag);
 
-            int[] coordinate ;
             int[] coordinateZero = field.GetLocation(0);
-            int x ;
-            int y ;
             int xZero = coordinateZero[0];
             int yZero = coordinateZero[1];
 
-            for(int i=0; i< tag.Length; i++)
+            for(int i=0; i< 16; i++)
             {
-                coordinate = field.GetLocation(i);
-                x = coordinate[0];
-                y = coordinate[1];
+                int[] coordinate = field.GetLocation(i);
+                int x = coordinate[0];
+                int y = coordinate[1];
 
                 if (Math.Abs(x - xZero) != 1 && Math.Abs(y - yZero) != 1)
                 {
