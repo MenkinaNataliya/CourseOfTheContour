@@ -5,7 +5,7 @@ using barley_break;
 namespace TestBarleyBreak
 {
     [TestClass]
-    public class UnitTest1
+    public class TestGame
     {
 
         Game field;

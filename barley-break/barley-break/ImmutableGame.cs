@@ -6,14 +6,27 @@ using System.Threading.Tasks;
 
 namespace barley_break
 {
-
-    public class Game:ImmutableGame,  InterfaceGame
+    public class ImmutableGame:  InterfaceGame
     {
-        private int[,] field;
-        private int sizeField;
-        private Coordinate[] valuesLocation;
 
-        public Game(params int[] args)
+        private readonly  int[,] field;
+        public int[,] Field {
+            get { return field; }
+        }
+        private readonly int sizeField;
+        public int SizeField
+        {
+            get { return sizeField; }
+        }
+
+        private readonly Coordinate[] valuesLocation;
+        public Coordinate[] ValuesLocation{
+            get { return valuesLocation; }    
+        }
+
+       
+
+        public ImmutableGame(params int[] args)
         {
             if (Math.Sqrt(args.Length) % 1 != 0)
             {
@@ -55,32 +68,45 @@ namespace barley_break
 
         public Coordinate GetLocation(int value)
         {
-            if (value >= sizeField* sizeField) throw new ArgumentException("Incorrectly sets the value"); 
+            if (value >= sizeField * sizeField) throw new ArgumentException("Incorrectly sets the value");
 
             return valuesLocation[value];
         }
 
-        public Game Shift(int value)
+        public ImmutableGame Shift(int value)
         {
+           
             Coordinate coordinateValue = GetLocation(value);
             Coordinate coordinateZero = GetLocation(0);
-            
 
+            
             if (Math.Abs(coordinateValue.X - coordinateZero.X) == 1 && Math.Abs(coordinateValue.Y - coordinateZero.Y) == 0
              || Math.Abs(coordinateValue.X - coordinateZero.X) == 0 && Math.Abs(coordinateValue.Y - coordinateZero.Y) == 1)
             {
 
-                field[coordinateValue.X, coordinateValue.Y] = 0;
-                field[coordinateZero.X, coordinateZero.Y] = value;
+                int[] resArg=new int[this.valuesLocation.Length];
 
-                valuesLocation[0] = coordinateValue;
-                valuesLocation[value] = coordinateZero;
-                return this;
 
+                int i= 0;
+                int indexZero=0;
+                int indexValue = 0;
+                foreach (var tmp in field) {
+                    resArg[i] = tmp;
+                    if (tmp == 0) indexZero = i;
+                    if (tmp == value) indexValue = i;
+                    i++;
+                }
+   
+                resArg[indexValue] = 0;
+                resArg[indexZero] = value;
+
+               ImmutableGame resultGame = new ImmutableGame(resArg);
+
+                return resultGame;
             }
             else throw new ArgumentException("Zero is not on an adjacent site");
 
-
+            
         }
     }
 
