@@ -7,21 +7,11 @@ using System.Threading.Tasks;
 namespace barley_break
 {
 
-    class Coordinate {
-        public int x { get; set; }
-        public int y { get; set; }
-
-        public Coordinate(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    }
     public class Game
     {
-        private int[,] Field;
-        private int SizeField;
-        private Coordinate[] ChipLayout;
+        private int[,] field;
+        private int sizeField;
+        private Coordinate[] valuesLocation;
 
         public Game(int[] args)
         {
@@ -31,19 +21,17 @@ namespace barley_break
             }
             else
             {
-                SizeField = (int)Math.Sqrt(args.Length);
-                Field = new int[SizeField, SizeField];
-                ChipLayout = new Coordinate[args.Length];
-
-                var rnd = new Random(1);
+                sizeField = (int)Math.Sqrt(args.Length);
+                field = new int[sizeField, sizeField];
+                valuesLocation = new Coordinate[args.Length];
 
                 int k = 0;
-                for (int i = 0; i < SizeField; i++)
-                    for (int j = 0; j < SizeField; j++)
+                for (int i = 0; i < sizeField; i++)
+                    for (int j = 0; j < sizeField; j++)
                     {
-                        Field[i, j] = args[k];
+                        field[i, j] = args[k];
                         Coordinate coord = new Coordinate(i, j);
-                        ChipLayout[args[k]] = coord;
+                        valuesLocation[args[k]] = coord;
 
                         k++;
                     }
@@ -54,41 +42,39 @@ namespace barley_break
         {
             get
             {
-                if (x >= SizeField || y >= SizeField) throw new ArgumentException("Incorrectly sets the index");
-                else return Field[x, y];
+                if (x >= sizeField || y >= sizeField) throw new ArgumentException("Incorrectly sets the index");
+                else return field[x, y];
             }
             private set
             {
-                if (x >= SizeField || y >= SizeField) throw new ArgumentException("Incorrectly sets the index");
-                else Field[x, y] = value;
+                if (x >= sizeField || y >= sizeField) throw new ArgumentException("Incorrectly sets the index");
+                else field[x, y] = value;
             }
         }
 
 
-        public int[] GetLocation(int value)
+        public Coordinate GetLocation(int value)
         {
-            if (value >= SizeField* SizeField) throw new ArgumentException("Incorrectly sets the value"); 
-            int[] result = new int[2];
-            result[0] = ChipLayout[value].x;
-            result[1] = ChipLayout[value].y;
-            return result;
+            if (value >= sizeField* sizeField) throw new ArgumentException("Incorrectly sets the value"); 
+
+            return valuesLocation[value];
         }
 
         public void Shift(int value)
         {
-            int[] coordinate = GetLocation(value);
-            int[] coordinateZero = GetLocation(0);
-            int x = coordinate[0];
-            int y = coordinate[1];
-            int xZero = coordinateZero[0];
-            int yZero = coordinateZero[1];
+            Coordinate coordinateValue = GetLocation(value);
+            Coordinate coordinateZero = GetLocation(0);
+            
 
-            if (Math.Abs(x - xZero) == 1 && Math.Abs(y - yZero) == 0
-             || Math.Abs(x - xZero) == 0 && Math.Abs(y - yZero) == 1)
+            if (Math.Abs(coordinateValue.X - coordinateZero.X) == 1 && Math.Abs(coordinateValue.Y - coordinateZero.Y) == 0
+             || Math.Abs(coordinateValue.X - coordinateZero.X) == 0 && Math.Abs(coordinateValue.Y - coordinateZero.Y) == 1)
             {
 
-                Field[x, y] = 0;
-                Field[xZero, yZero] = value;
+                field[coordinateValue.X, coordinateValue.Y] = 0;
+                field[coordinateZero.X, coordinateZero.Y] = value;
+
+                valuesLocation[0] = coordinateValue;
+                valuesLocation[value] = coordinateZero;
 
             }
             else throw new ArgumentException("Zero is not on an adjacent site");
@@ -96,4 +82,5 @@ namespace barley_break
 
         }
     }
+
 }

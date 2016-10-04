@@ -21,7 +21,7 @@ namespace TestBarleyBreak
         [TestMethod]
         public void GoingBeyondBoundsOfarray()
         {
-            field.GetLocation(field[4, 1]);
+            int value = field[4, 1];
         }
 
         [ExpectedException(typeof(ArgumentException))]
@@ -36,9 +36,9 @@ namespace TestBarleyBreak
         [TestMethod]
         public void SuccessfulDeterminingElementCoordinates() {
 
-            int[] res = field.GetLocation(5);
+            Coordinate res= field.GetLocation(5);
 
-            Assert.AreEqual(5, field[ res[0], res[1]]);
+            Assert.AreEqual(5, field[ res.X,res.Y]);
 
         }
 
@@ -46,28 +46,24 @@ namespace TestBarleyBreak
         [TestMethod]
         public void DisastrousDeterminingElementCoordinates() {
 
-            int[] res = field.GetLocation(19);
+            Coordinate coord = field.GetLocation(19);
         }
 
         [TestMethod]
         public void SuccessfulMovementOfChips()
         {
-            for (int i = 1; i < 16; i++)
+                for (int i = 1; i < 16; i++)
             {
-                int[] coordinate = field.GetLocation(i);
-                int x = coordinate[0];
-                int y = coordinate[1];
+                Coordinate coordValue = field.GetLocation(i);
 
-                int[] coordinateZero = field.GetLocation(0);
-                int xZero = coordinateZero[0];
-                int yZero = coordinateZero[1];
+                Coordinate coordZero = field.GetLocation(0);
 
-                if (Math.Abs(x - xZero) == 1 && Math.Abs(y - yZero) == 0
-                    || Math.Abs(x - xZero) == 0 && Math.Abs(y - yZero) == 1)
+                if (Math.Abs(coordValue.X - coordZero.X) == 1 && Math.Abs(coordValue.Y - coordZero.Y) == 0
+                    || Math.Abs(coordValue.X - coordZero.X) == 0 && Math.Abs(coordValue.X - coordZero.Y) == 1)
                 {
                     field.Shift(i);
-                    Assert.AreEqual(0, field[x, y]);
-                    Assert.AreEqual(i, field[xZero, yZero]);
+                    Assert.AreEqual(0, field[coordValue.X, coordValue.Y]);
+                    Assert.AreEqual(i, field[coordZero.X, coordZero.Y]);
                 }
             }
         }
@@ -77,22 +73,36 @@ namespace TestBarleyBreak
         public void DisastrousMovementOfChips()
         {
 
-            int[] coordinateZero = field.GetLocation(0);
-            int xZero = coordinateZero[0];
-            int yZero = coordinateZero[1];
-
-            for(int i=0; i< 16; i++)
+            for (int i=0; i< 16; i++)
             {
-                int[] coordinate = field.GetLocation(i);
-                int x = coordinate[0];
-                int y = coordinate[1];
+                Coordinate coordValue = field.GetLocation(i);
+                Coordinate coordZero = field.GetLocation(0);
 
-                if (Math.Abs(x - xZero) != 1 && Math.Abs(y - yZero) != 1)
+                if (Math.Abs(coordValue.X - coordZero.X) != 1 && Math.Abs(coordValue.Y - coordZero.Y) != 1)
                 {
                     field.Shift(i);
                 }
             }
 
+        }
+
+        [TestMethod]
+        public void Not_GetLocationBreakAfterShift() {
+            for (int i = 1; i < 16; i++)
+            {
+                Coordinate coordValue = field.GetLocation(i);
+
+                Coordinate coordZero = field.GetLocation(0);
+
+                if (Math.Abs(coordValue.X - coordZero.X) == 1 && Math.Abs(coordValue.Y - coordZero.Y) == 0
+                    || Math.Abs(coordValue.X - coordZero.X) == 0 && Math.Abs(coordValue.X - coordZero.Y) == 1)
+                {
+                    field.Shift(i);
+                    field.Shift(i);
+                    Assert.AreEqual(i, field[coordValue.X, coordValue.Y]);
+                    Assert.AreEqual(0, field[coordZero.X, coordZero.Y]);
+                }
+            }
         }
 
     }
