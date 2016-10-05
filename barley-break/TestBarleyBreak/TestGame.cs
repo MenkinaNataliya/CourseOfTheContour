@@ -9,19 +9,25 @@ namespace TestBarleyBreak
     {
 
         Game field;
+        ImmutableGame immutableField;
 
         [TestInitialize]
         public void TestInitialize()
         {
             int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15, 0 };
             field = new Game(tag);
+            immutableField = new ImmutableGame(tag);
+
+
         }
+
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void GoingBeyondBoundsOfarray()
         {
             int value = field[4, 1];
+            value = immutableField[4, 1];
         }
 
         [ExpectedException(typeof(ArgumentException))]
@@ -30,23 +36,18 @@ namespace TestBarleyBreak
         {
             int[] tag = { 1, 2, 3, 4, 5, 6, 7, 8};
             Game field = new Game(tag);
+
+            ImmutableGame immutableField = new ImmutableGame(tag);
             
         }
 
-        [TestMethod]
-        public void SuccessfulDeterminingElementCoordinates() {
-
-            Coordinate res= field.GetLocation(5);
-
-            Assert.AreEqual(5, field[ res.X,res.Y]);
-
-        }
 
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void DisastrousDeterminingElementCoordinates() {
 
             Coordinate coord = field.GetLocation(19);
+            coord = immutableField.GetLocation(19);
         }
 
         [TestMethod]
@@ -85,6 +86,26 @@ namespace TestBarleyBreak
             }
 
         }
+
+        [ExpectedException(typeof(ArgumentException))]
+        [TestMethod]
+        public void DisastrousMovementOfChipsImmutableGame()
+        {
+
+            for (int i = 0; i < 16; i++)
+            {
+                Coordinate coordValue = immutableField.GetLocation(i);
+                Coordinate coordZero = immutableField.GetLocation(0);
+
+                if (Math.Abs(coordValue.X - coordZero.X) != 1 && Math.Abs(coordValue.Y - coordZero.Y) != 1)
+                {
+                    immutableField.Shift(i);
+                }
+            }
+
+        }
+
+
 
         [TestMethod]
         public void Not_GetLocationBreakAfterShift() {

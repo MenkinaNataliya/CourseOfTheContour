@@ -9,9 +9,9 @@ namespace barley_break
     interface InterfaceGame
     {
         Coordinate GetLocation(int value);
-        ImmutableGame Shift(int value);
+        Game Shift(int value);
 
-
+        int this[int x, int y] { get; set; }
 
 
     }
