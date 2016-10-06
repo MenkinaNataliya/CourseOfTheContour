@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 namespace barley_break
 {
 
-    public class Game: InterfaceGame
+    public class Game: IGame
     {
-        private int[,] field;
+        private int[,] field { get;  set; }
         private int sizeField { get; set; }
-        private Coordinate[] valuesLocation;
+        private  Coordinate[] valuesLocation;
+
+
 
         public Game(params int[] args)
         {
@@ -38,7 +40,7 @@ namespace barley_break
             }
         }
 
-        public int this[int x, int y]
+        public virtual int this[int x, int y]
         {
             get
             {
@@ -53,14 +55,14 @@ namespace barley_break
         }
 
 
-        public Coordinate GetLocation(int value)
+        public virtual Coordinate GetLocation(int value)
         {
-            if (value >= sizeField * sizeField) throw new ArgumentException("Incorrectly sets the value"); 
+            if (value >=sizeField * sizeField) throw new ArgumentException("Incorrectly sets the value"); 
 
             return valuesLocation[value];
         }
 
-        public  Game Shift(int value)
+        public virtual IGame Shift(int value)
         {
             Coordinate coordinateValue = GetLocation(value);
             Coordinate coordinateZero = GetLocation(0);
