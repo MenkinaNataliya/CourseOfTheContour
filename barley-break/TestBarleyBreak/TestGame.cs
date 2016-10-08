@@ -32,7 +32,6 @@ namespace TestBarleyBreak
         [TestMethod]
         public void GoingBeyondBoundsOfarray()
         {
-
             int value = field[4, 1];
         }
 
@@ -106,7 +105,7 @@ namespace TestBarleyBreak
         }
     }
 
-    [TestClass]
+   [TestClass]
    public  class ImmutableTest : TestGame
     {
         
@@ -129,6 +128,18 @@ namespace TestBarleyBreak
             Assert.AreEqual(newGame[2, 1], 0);
             Assert.AreEqual(newGame[2, 2], 8);
             Assert.AreNotEqual(game, newGame);
+        }
+
+    }
+
+    [TestClass]
+    public class DecoratorGame : ImmutableTest
+    {
+        protected override Game CreateGame(int[] args)
+        {
+            ImmutableGame field = new ImmutableGame(0, 2, 3, 4, 5, 7, 8, 9, 1);
+            field = new Decorator(field);
+            return field;
         }
 
     }

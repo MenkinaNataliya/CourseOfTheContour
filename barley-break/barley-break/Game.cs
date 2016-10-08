@@ -9,12 +9,16 @@ namespace barley_break
 
     public class Game: IGame
     {
-        private int[,] field { get;  set; }
-        private int sizeField { get; set; }
-        private  Coordinate[] valuesLocation;
+        protected int[,] field { get;  private set; }
+        protected int sizeField { get; private set; }
+        protected Coordinate[] valuesLocation;
 
 
-
+        public Game(Game game)
+        {
+            valuesLocation = (Coordinate[])game.valuesLocation.Clone();
+            field = (int[,])game.field.Clone();
+        }
         public Game(params int[] args)
         {
             if (Math.Sqrt(args.Length) % 1 != 0)
@@ -57,7 +61,7 @@ namespace barley_break
 
         public virtual Coordinate GetLocation(int value)
         {
-            if (value >=sizeField * sizeField) throw new ArgumentException("Incorrectly sets the value"); 
+            if (value >= sizeField * sizeField) throw new ArgumentException("Incorrectly sets the value"); 
 
             return valuesLocation[value];
         }
