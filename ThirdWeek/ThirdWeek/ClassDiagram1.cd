@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ThirdWeek.Ability">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAgiAoAAAAAAAAAAAAAAUAAIAAAAAAAAAAIA=</HashCode>
+      <FileName>Ability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Freeze" Collapsed="true">
+    <Position X="3.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AllAbilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.ManipulationOfConsciousness" Collapsed="true">
+    <Position X="8" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AllAbilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.FireBall" Collapsed="true">
+    <Position X="5.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AllAbilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.StandartAbility" Collapsed="true">
+    <Position X="1.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandartAbility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Hit" Collapsed="true">
+    <Position X="2.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandartAbility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Jump" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandartAbility.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Personage">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIAAIAAAAAAAAgAAAAAIAAEACAEAAAoAAAAAAE=</HashCode>
+      <FileName>Personage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.DemonHunter" Collapsed="true">
+    <Position X="8.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Personages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.KeeperOfGrove" Collapsed="true">
+    <Position X="13" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Personages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.PriestessOfMoon" Collapsed="true">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Personages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.LookingInNight" Collapsed="true">
+    <Position X="15.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Personages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
