@@ -3,7 +3,7 @@
   <Class Name="ThirdWeek.Ability">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAgiAoAAAAAAAAAAAAAAUAAIAAAAAAAAAAIA=</HashCode>
+      <HashCode>AQAAAAAAAgiAoAAAAAQAAAQAAgAQAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Ability.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -49,39 +49,53 @@
       <FileName>StandartAbility.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ThirdWeek.Personage">
-    <Position X="10.5" Y="0.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAEIAAIAAAAAAAAgAAAAAIAAEACAEAAAoAAAAAAE=</HashCode>
-      <FileName>Personage.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="ThirdWeek.DemonHunter" Collapsed="true">
     <Position X="8.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Personages.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ThirdWeek.KeeperOfGrove" Collapsed="true">
     <Position X="13" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Personages.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ThirdWeek.PriestessOfMoon" Collapsed="true">
     <Position X="10.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Personages.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ThirdWeek.LookingInNight" Collapsed="true">
     <Position X="15.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Personages.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Effect">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAABAAAAAAAAI=</HashCode>
+      <FileName>Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Stupor" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ThirdWeek.Personage">
+    <Position X="11.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgUIAAAAAAAAAAAwAAAABIAQEACAAAAAIAAAAIAA=</HashCode>
+      <FileName>Personage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Ability.cs" />
     <Compile Include="AllAbilities.cs" />
+    <Compile Include="Effect.cs" />
     <Compile Include="Personages.cs" />
     <Compile Include="Personage.cs" />
     <Compile Include="Program.cs" />

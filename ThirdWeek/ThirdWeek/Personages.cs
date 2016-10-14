@@ -10,9 +10,9 @@ namespace ThirdWeek
     {
         public DemonHunter() : base("DemonHunter")
         {
-            abilities.Add("FireBall", new FireBall());
+            Abilities.Add("FireBall", new FireBall());
         }
-        public override int GetRegenerationHitPoints()
+        public override int GetRegenerationHitpoints()
         {
             return 15;
         }
@@ -26,9 +26,9 @@ namespace ThirdWeek
     {
         public KeeperOfGrove() : base("KeeperOfGrove")
         {
-            abilities.Add("Freeze", new Freeze());
+            Abilities.Add("Freeze", new Freeze());
         }
-        public override int GetRegenerationHitPoints()
+        public override int GetRegenerationHitpoints()
         {
             return 11;
         }
@@ -41,11 +41,11 @@ namespace ThirdWeek
     {
         public PriestessOfMoon() : base("PriestessOfMoon")
         {
-            abilities.Add("FireBall", new FireBall());
-            abilities.Add("ManipulationOfConsciousness", new ManipulationOfConsciousness());
+            Abilities.Add("FireBall", new FireBall());
+            Abilities.Add("ManipulationOfConsciousness", new ManipulationOfConsciousness());
 
         }
-        public override int GetRegenerationHitPoints()
+        public override int GetRegenerationHitpoints()
         {
             return 5;
         }
@@ -58,9 +58,9 @@ namespace ThirdWeek
     {
         public LookingInNight() : base("LookingInNight")
         {
-            abilities.Add("ManipulationOfConsciousness", new ManipulationOfConsciousness());
+            Abilities.Add("ManipulationOfConsciousness", new ManipulationOfConsciousness());
         }
-        public override int GetRegenerationHitPoints()
+        public override int GetRegenerationHitpoints()
         {
             return 7;
         }

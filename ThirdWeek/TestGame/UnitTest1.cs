@@ -17,7 +17,7 @@ namespace TestGame
             keeper.UseAbility("Freeze", demon);
             keeper.UseAbility("Freeze", demon);
 
-            Assert.AreEqual(demon.hitpoints, 100 - keeper.abilities["Freeze"].GetDamage());
+            Assert.AreEqual(demon.Hitpoints, 100 - keeper.Abilities["Freeze"].GetDamage());
             
 
         }
@@ -28,7 +28,7 @@ namespace TestGame
             keeper.UseAbility("Hit", demon);
             keeper.UseAbility("Hit", demon);
 
-            Assert.AreEqual(demon.hitpoints, 100 - 2*keeper.abilities["Hit"].GetDamage());
+            Assert.AreEqual(demon.Hitpoints, 100 - 2*keeper.Abilities["Hit"].GetDamage());
 
         }
 
@@ -38,7 +38,7 @@ namespace TestGame
             keeper.UseAbility("Hit", demon);
             keeper.UseAbility("Freeze", demon);
 
-            Assert.AreEqual(demon.hitpoints, 100 -keeper.abilities["Hit"].GetDamage()- keeper.abilities["Freeze"].GetDamage());
+            Assert.AreEqual(demon.Hitpoints, 100 -keeper.Abilities["Hit"].GetDamage()- keeper.Abilities["Freeze"].GetDamage());
 
         }
 

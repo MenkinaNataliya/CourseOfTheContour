@@ -9,11 +9,13 @@ namespace ThirdWeek
 {
     public abstract class Ability
     {
-        public string name { get; protected set; }
+        public string Name { get; protected set; }
         int cost;
         int damage;
 
-        public bool useOf;
+        public bool UseOf;
+
+        public Effect Effects;
 
         public abstract int GetDamage();
         public abstract int GetCost();
@@ -21,17 +23,17 @@ namespace ThirdWeek
         public abstract int GetRecoveryTime();
         public int AbilityToUse(Personage opponent)
         {
-            opponent.hitpoints -= this.GetDamage();
-            useOf = false;
+            opponent.Hitpoints -= this.GetDamage();
+            UseOf = false;
 
             return GetCost();
         }
         public Ability(string name)
         {
-            this.name = name;
+            this.Name = name;
             cost = 5;
             
-            useOf = true;
+            UseOf = true;
             CheckUseOf(null);
         }
 
@@ -40,7 +42,7 @@ namespace ThirdWeek
             TimerCallback tm = new TimerCallback(CheckUseOf);
             Timer timer = new Timer(tm, null, 0, 30000);
 
-            if (!useOf)
+            if (!UseOf)
             {
                 TimerCallback tc = new TimerCallback(ChangeUseOf);
                 Timer timer1 = new Timer(tc, null, this.GetRecoveryTime(), 0);
@@ -48,7 +50,7 @@ namespace ThirdWeek
         }
         private void ChangeUseOf(object obj)
         {
-            this.useOf =true;
+            this.UseOf =true;
             CheckUseOf(null);
         }
 
