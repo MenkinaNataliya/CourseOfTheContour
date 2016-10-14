@@ -37,7 +37,7 @@ namespace ThirdWeek
 
         public void UseAbility(String name, Personage opponent)
         {
-            if (this.Manna >= Abilities[name].GetCost() && Abilities[name].useOf)
+            if (this.Manna >= Abilities[name].GetCost() && Abilities[name].UseOf)
             {
                 this.Manna -= Abilities[name].AbilityToUse(opponent);
             }
@@ -85,6 +85,8 @@ namespace ThirdWeek
             this.Hitpoints++;
             CheckHitpoints(null);
         }
+
+
     }
 
    
