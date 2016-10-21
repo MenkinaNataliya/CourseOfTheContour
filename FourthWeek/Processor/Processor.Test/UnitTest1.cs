@@ -16,11 +16,10 @@ namespace Processor.Test
             stringList.Add("Hello");
             stringList.Add("World");
 
-            var stringListEnumerable = storage.GetPairsOfElements<List<string>>().GetEnumerator();
-            stringListEnumerable.MoveNext();
+            var stringListEnumerable = storage.GetPairsOfElements<List<string>>();
 
-            Assert.AreEqual(stringListEnumerable.Current.Value[1], "World");
-            Assert.AreEqual(storage.GetObjectByGuid<List<string>>(stringListEnumerable.Current.Key)[0], stringList[0]);
+           Assert.AreEqual(stringListEnumerable[1].Value, "World");
+           Assert.AreEqual(storage.GetObjectByGuid<List<string>>(stringListEnumerable[0].Key), stringList[0]);
 
         }
 

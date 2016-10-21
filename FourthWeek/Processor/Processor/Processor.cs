@@ -11,24 +11,24 @@ namespace Processor
     {
     }
 
-    public class Processor
+    public class ProcessorBuilder
     {
-        public static Engine<TEngine> CreateEngine<TEngine>()
+        public static ProcessorWithEngine<TEngine> CreateEngine<TEngine>()
         {
-            return new Engine<TEngine>();
+            return new ProcessorWithEngine<TEngine>();
         }
 
     }
 
-    public class Engine<TEngine>
+    public class ProcessorWithEngine<TEngine>
     {
-        public Entity<TEngine, TEntity> For<TEntity>()
+        public ProcessorWithEntity<TEngine, TEntity> For<TEntity>()
         {
-            return new Entity<TEngine, TEntity>();
+            return new ProcessorWithEntity<TEngine, TEntity>();
         }
     }
 
-    public class Entity<TEngine, TEntity>
+    public class ProcessorWithEntity<TEngine, TEntity>
     {
         public Processor<TEngine, TEntity, TLogger> With<TLogger>()
         {
