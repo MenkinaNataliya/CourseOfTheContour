@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Processor;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Processor.Test
 {
@@ -19,8 +20,8 @@ namespace Processor.Test
             var stringListEnumerable = storage.GetPairsOfElements<string>();
 
            
-           Assert.AreEqual(stringListEnumerable[1].Value, "World");
-           Assert.AreEqual(storage.GetObjectByGuid<string>(stringListEnumerable[0].Key), stringList[0]);
+           Assert.AreEqual(stringListEnumerable.First().Value, "Hello");
+           Assert.AreEqual(storage.GetObjectByGuid<string>(stringListEnumerable.First().Key), stringList[0]);
 
         }
 

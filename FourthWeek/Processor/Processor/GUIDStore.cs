@@ -12,43 +12,51 @@ namespace Processor
 
         public TType CreateObject<TType>() 
         where TType : new()     
-        { 
-            if (!dictionaryObjects.ContainsKey(typeof(TType)))
+        {
+            var value = new Dictionary<Guid, object>();
+
+            if (dictionaryObjects.TryGetValue(typeof(TType), out value))
             {
-                
+                dictionaryObjects[typeof(TType)][Guid.NewGuid()] = new TType();
+            }
+            else
+            {
                 dictionaryObjects[typeof(TType)] = new Dictionary<Guid, object>();
             }
-                
 
-            return (TType)(dictionaryObjects[typeof (TType)][Guid.NewGuid()] = new TType());
+
+            return (TType)dictionaryObjects[typeof (TType)][Guid.NewGuid()];
         }
 
-        public List<KeyValuePair<Guid, TType>> GetPairsOfElements<TType>()
+        public Dictionary<Guid, TType> GetPairsOfElements<TType>()
         {
-
-            if (!dictionaryObjects.ContainsKey(typeof(TType))) return new List<KeyValuePair<Guid, TType>>(0);
-
-            List<KeyValuePair<Guid, TType>> guidObjectPairs = new List<KeyValuePair<Guid, TType>>();
-            foreach (var dictionary in dictionaryObjects[typeof(TType)])
+            var resultDictionary = new Dictionary<Guid, object>();
+            if (dictionaryObjects.TryGetValue(typeof(TType), out resultDictionary))
             {
-
-                guidObjectPairs.Add(new KeyValuePair<Guid, TType>(dictionary.Key, (TType)dictionary.Value));
+                var returnDictionary = new Dictionary<Guid, TType>();
+                foreach (var item in resultDictionary)
+                {
+                    resultDictionary.Add(item.Key, (TType) item.Value);
+                }
+                return returnDictionary;
             }
-                
-            return guidObjectPairs;
+            else   return new Dictionary<Guid, TType>(0);
 
         }
 
         public TType GetObjectByGuid<TType>(Guid guid)
         {
-            if (!dictionaryObjects.ContainsKey(typeof(TType))) return default(TType);
-            else
-            {
-                Dictionary<Guid, object> resultDictionary = dictionaryObjects[typeof(TType)];
+            var resultDictionary = new Dictionary<Guid, object>();
 
-                if (resultDictionary.ContainsKey(guid)) return (TType)resultDictionary[guid];
-                else return default(TType);
+            if (dictionaryObjects.TryGetValue(typeof(TType), out resultDictionary))
+            {
+                object result;
+                if (resultDictionary.TryGetValue(guid, out result))
+                    return (TType)resultDictionary[guid];
+                    
             }
+            return default(TType);
+
         }
     }
 }
