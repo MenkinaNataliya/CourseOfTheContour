@@ -40,7 +40,7 @@ namespace Processor
                 }
                 return returnDictionary;
             }
-            else   return new Dictionary<Guid, TType>(0);
+            return new Dictionary<Guid, TType>(0);
 
         }
 
@@ -56,7 +56,6 @@ namespace Processor
                     
             }
             return default(TType);
-
         }
     }
 }
