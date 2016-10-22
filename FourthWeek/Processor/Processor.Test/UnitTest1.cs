@@ -12,8 +12,8 @@ namespace Processor.Test
         [TestMethod]
         public void TestStorageString()
         {
-            Storage storage = new Storage();
-            List<string> stringList =  storage.CreateObject<List<string>>();
+            var storage = new Storage();
+            var stringList =  storage.CreateObject<List<string>>();
             stringList.Add("Hello");
             stringList.Add("World");
 
@@ -28,7 +28,7 @@ namespace Processor.Test
         [TestMethod]
         public void GetTypeOfObjectThatIsNotInDictionary()
         {
-            Storage storage = new Storage();
+            var storage = new Storage();
 
             Assert.AreEqual(storage.GetObjectByGuid<Dictionary<long, int>>(Guid.NewGuid()), null);
         }
