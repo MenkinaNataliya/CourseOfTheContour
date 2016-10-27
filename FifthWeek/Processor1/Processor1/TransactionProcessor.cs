@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Processor1
 {
-    public class TransactionProcessor<TParameters>
+    public class TransactionProcessor<TParameters, TParametersResult>
     {
-        public TransactionProcessor(Func<TParameters, bool> checkFunc, Func<TParameters, TParameters> registerFunc, Action<TParameters> saveFunc)
+        public TransactionProcessor(Func<TParameters, bool> checkFunc, Func<TParameters, TParametersResult> registerFunc, Action<TParametersResult> saveFunc)
         {
             this.checkFunc = checkFunc;
             this.registerFunc = registerFunc;
@@ -17,10 +17,10 @@ namespace Processor1
         }
 
         private Func<TParameters, bool> checkFunc;
-        private Func<TParameters, TParameters> registerFunc;
-        private Action<TParameters> saveFunc;
+        private Func<TParameters, TParametersResult> registerFunc;
+        private Action<TParametersResult> saveFunc;
 
-        public TParameters Process(TParameters request)
+        public TParametersResult Process(TParameters request)
         {
             if (!checkFunc(request))
                 throw new ArgumentException();
