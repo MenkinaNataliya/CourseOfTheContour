@@ -12,7 +12,7 @@ namespace Processor1.Test
         [TestInitialize]
         public void TestInitialize()
         {
-            data = new DataModel();
+            data = new DataModel(4,4);
             data.Put(1, 1, 8);
             data.Put(1, 3, 6);
             data.Put(2, 2, 7);
@@ -59,6 +59,7 @@ namespace Processor1.Test
             Assert.AreEqual(8, data.Get(2,1));
             Assert.AreEqual(5, data.Get(4, 3));
         }
+
 
     }
 }
