@@ -4,11 +4,10 @@ namespace Plugin2
 {
     public class Plugin2: IPlugin
     {
-        public string Name { get; set; }
-
-        public Plugin2(string name)
-        {
-            Name = name;
+        public string Name {
+            get { return "Plugin2"; }
+            set { }
         }
+
     }
 }

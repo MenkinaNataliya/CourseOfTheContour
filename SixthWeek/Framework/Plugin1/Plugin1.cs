@@ -5,11 +5,11 @@ namespace Plugin1
     public class Plugin1: IPlugin
     {
 
-        public string Name { get; set; }
-
-        public Plugin1(string name)
+        public string Name
         {
-            Name = name;
+            get { return "Plugin1"; }
+            set { }
         }
+        
     }
 }
