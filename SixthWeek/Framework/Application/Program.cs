@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Framework;
 
@@ -8,21 +9,22 @@ namespace Application
     public class Program
     {
 
-        private static IPlugin GetPlugin(string filename)
+        private static List<IPlugin> GetPlugin(string filename)
         {
             var file = Assembly.LoadFile(filename);
 
-            object newPlugin = null;
+           var newPlugin = new List<IPlugin>();
 
             foreach (var type in file.GetTypes())
             {
                 
                 if (type.IsClass && type.IsPublic)
                 {
-                    newPlugin = Activator.CreateInstance(type);
+                    newPlugin.Add((IPlugin)Activator.CreateInstance(type));
                 }
             }
-            return (IPlugin)((IPlugin)newPlugin == null ? null : newPlugin);
+           
+            return newPlugin.Count == 0 ? null : newPlugin;
         }
 
         static void Main(string[] args)
@@ -33,8 +35,10 @@ namespace Application
             var plugin1Obj = GetPlugin(plugin1Dll);
             var plugin2Obj = GetPlugin(plugin2Dll);
 
-            Console.WriteLine(plugin1Obj.Name);
-            Console.WriteLine(plugin2Obj.Name);
+            foreach(var item in plugin1Obj)
+                Console.WriteLine(item.Name);
+            foreach (var item in plugin2Obj)
+                Console.WriteLine(item.Name);
             Console.ReadLine();
            
 
