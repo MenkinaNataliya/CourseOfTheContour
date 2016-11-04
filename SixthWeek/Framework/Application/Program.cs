@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Framework;
 
@@ -15,16 +16,19 @@ namespace Application
 
            var newPlugin = new List<IPlugin>();
 
-            foreach (var type in file.GetTypes())
+             foreach (var type in file.GetTypes())
             {
                 
-                if (type.IsClass && type.IsPublic)
+               // if(interf.Contains())
+                if (type.IsClass && type.IsPublic  )
                 {
-                    newPlugin.Add((IPlugin)Activator.CreateInstance(type));
+                    var interf = type.GetInterfaces().ToList();
+                    foreach (var item in interf)
+                        if (item.Name == "IPlugin") newPlugin.Add((IPlugin)Activator.CreateInstance(type));
                 }
             }
            
-            return newPlugin.Count == 0 ? null : newPlugin;
+            return newPlugin.Count == 0 ? new List<IPlugin>() : newPlugin;
         }
 
         static void Main(string[] args)

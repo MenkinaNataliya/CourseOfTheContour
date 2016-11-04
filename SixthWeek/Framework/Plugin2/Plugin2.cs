@@ -10,4 +10,13 @@ namespace Plugin2
         }
 
     }
+
+    public class Plugin3
+    {
+        public string Name
+        {
+            get { return "Plugin3"; }
+            set { }
+        }
+    }
 }
