@@ -25,13 +25,12 @@ namespace ConsoleApplication1
         }
 
 
-        public void SetPixel( int x, int y, int r, int g, int b)
+        public void SetPixel(int x, int y, int r, int g, int b)
         {
-          
-            var color = Color.FromArgb(255, r,g,b);
-            Marshal.WriteByte(bitmapData.Scan0, (byte)(color.ToArgb() << 4));
-          
+            var color = Color.FromArgb(255, r, g, b);
+            Marshal.WriteByte(bitmapData.Scan0, x / 2 + y * bitmapData.Stride, (byte)(color.ToArgb() << 4));
         }
+
 
         public void Dispose()
         {
