@@ -17,8 +17,8 @@ namespace ConsoleApplication1
             var bitmap = (Bitmap)Bitmap.FromFile("test.png");
             using (timer.Start())
             {
-                for (var i = 0; i < 100; i++)
-                    for (var j = 0; j < 100; j++)
+                for (var i = 0; i < bitmap.Width; i++)
+                    for (var j = 0; j < bitmap.Height; j++)
                         bitmap.SetPixel(i, j, Color.FromArgb(48,50,98));
                 bitmap.Save(@"EndFisrtTest.png");
             }
@@ -28,9 +28,9 @@ namespace ConsoleApplication1
             {
                 using (var bitmapEditor = new BitmapEditor(bitmap))
                 {
-                    for (var i = 0; i < 100; i++)
-                        for (var j = 0; j < 100; j++)
-                            bitmapEditor.SetPixel(i, j, 185, 200, 149);
+                    for (var i = 0; i < bitmap.Width; i++)
+                        for (var j = 0; j < bitmap.Height; j++)
+                            bitmapEditor.SetPixel(i, j, 185, 100, 149);
                 }
                 bitmap.Save(@"EndSecondTest.png");
             }
