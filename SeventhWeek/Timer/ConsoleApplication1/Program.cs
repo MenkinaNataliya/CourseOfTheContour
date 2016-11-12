@@ -19,7 +19,7 @@ namespace ConsoleApplication1
             {
                 for (var i = 0; i < bitmap.Width; i++)
                     for (var j = 0; j < bitmap.Height; j++)
-                        bitmap.SetPixel(i, j, Color.FromArgb(48,50,98));
+                        bitmap.SetPixel(i, j, Color.FromArgb(48,15,198));
                 bitmap.Save(@"EndFisrtTest.png");
             }
             Console.WriteLine(timer.ElapsedMilliseconds);
@@ -30,7 +30,7 @@ namespace ConsoleApplication1
                 {
                     for (var i = 0; i < bitmap.Width; i++)
                         for (var j = 0; j < bitmap.Height; j++)
-                            bitmapEditor.SetPixel(i, j, 185, 100, 149);
+                            bitmapEditor.SetPixel(i, j, 185, 100, 19);
                 }
                 bitmap.Save(@"EndSecondTest.png");
             }

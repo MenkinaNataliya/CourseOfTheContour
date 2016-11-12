@@ -27,8 +27,14 @@ namespace ConsoleApplication1
 
         public void SetPixel(int x, int y, int r, int g, int b)
         {
-            var color = Color.FromArgb(255, r, g, b);
-            Marshal.WriteByte(bitmapData.Scan0, x / 2 + y * bitmapData.Stride, (byte)(color.ToArgb() << 4));
+            IntPtr ptr = bitmapData.Scan0 + (bitmapData.Width * y + x) * 3;
+            byte[] valuesPixel = new byte[3];
+
+            valuesPixel[0] = (byte)b;
+            valuesPixel[1] = (byte)g;
+            valuesPixel[2] = (byte)r;
+
+            Marshal.Copy(valuesPixel, 0, ptr,3);
         }
 
 
