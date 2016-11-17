@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,23 +10,27 @@ namespace ReadCsv
 {
     public class ReadCsv
     {
-        public static string[] lines = File.ReadAllLines("airquality.csv");
 
-        public static IEnumerable<string[]> ReadCsv1
+        public static IEnumerable<string[]> ReadCsv1(string filename)
         {
-            get
-            {
-                foreach (var t in lines)
-                {
-                    var line = t.Split(',');
-                    for (var j = 0; j < line.Length; j++)
-                    {
-                        if (line[j] == "NA") line[j] = null;
-                    }
-                    yield return line;
-                }
-            }
-        }
 
+                using (var stream = new StreamReader(filename))
+                    while (true)
+                    {
+                        var str = stream.ReadLine();
+                        if (str == null)
+                        {
+                            stream.Close();
+                            yield break;
+                        }
+                        var line = str.Split(',');
+                        for (var j = 0; j < line.Length; j++)
+                        {
+                            if (line[j] == "NA") line[j] = null;
+                        }
+                        yield return line;
+                    }
+
+        }
     }
 }

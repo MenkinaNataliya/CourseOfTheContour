@@ -14,7 +14,7 @@ namespace ReadCsv
         static void Main(string[] args)
         {
            
-            foreach (var line in ReadCsv.ReadCsv1)
+            foreach (var line in ReadCsv.ReadCsv1("airquality.csv"))
             {
               //  Console.WriteLine(line.);
             }
