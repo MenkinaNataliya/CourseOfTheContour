@@ -24,20 +24,6 @@ namespace ReadCsv
                 }
         }
 
-
-        private static void SetValue<T>(dynamic member, string value, T result)
-        {
-            if (typeof(T) == typeof(string))
-                member.SetValue(result, value);
-            else 
-                if (typeof(T) == typeof(double) || typeof(T) == typeof(double?))
-                    member.SetValue(result, double.Parse(value));
-                else 
-                    if (typeof(T) == typeof(int) || typeof(T) == typeof(int?))
-                        member.SetValue(result, int.Parse(value));
-                    
-        }
-
         public static IEnumerable<T> ReadCsv2<T>(string filename) where T : new()
         {
             List<MemberInfo> members = new List<MemberInfo>();
@@ -72,13 +58,12 @@ namespace ReadCsv
                             if (members[i].MemberType == MemberTypes.Field)
                             {
                                 var member = (FieldInfo) members[i];
-                                SetValue<T>(member, values[i], result);
-                                member.SetValue(result, values[i]);
+                                member.SetValue(result, (T)setValue(values[i]));
                             }
                             if (members[i].MemberType == MemberTypes.Property)
                             {
                                 var member = (PropertyInfo) members[i];
-                                SetValue<T>(member, values[i], result);
+                                member.SetValue(result, (T)setValue(values[i]));
                             }
                         }
                     }
@@ -87,7 +72,7 @@ namespace ReadCsv
             }
         }
 
-        private static object SetValue2(string value)
+        private static object setValue(string value)
         {
             if (value == "NA")
                 return null;
@@ -120,11 +105,12 @@ namespace ReadCsv
 
                     for (var i = 0; i < values.Length; ++i)
                     {
-                        result[columnNames[i]] = SetValue2(values[i]);
+                        result[columnNames[i]] = setValue(values[i]);
                     }
                     yield return result;
                 }
             }   
-        }   
+        }
+       
     }
 }
