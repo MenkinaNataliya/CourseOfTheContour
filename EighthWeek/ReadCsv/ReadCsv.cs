@@ -57,12 +57,12 @@ namespace ReadCsv
                         if (members[i].MemberType == MemberTypes.Field)
                         {
                             var member = (FieldInfo) members[i];
-                            member.SetValue(result, (T) SetValue(line[i]));
+                            member?.SetValue(result, (T) SetValue(line[i]));
                         }
                         if (members[i].MemberType == MemberTypes.Property)
                         {
                             var member = (PropertyInfo) members[i];
-                            member.SetValue(result, (T) SetValue(line[i]));
+                            member?.SetValue(result, (T) SetValue(line[i]));
                         }
                     }
                     yield return result;
