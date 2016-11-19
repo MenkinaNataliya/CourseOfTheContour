@@ -9,62 +9,60 @@ namespace ReadCsv
 {
     public class ReadCsv
     {
-        public static IEnumerable<string[]> ReadCsv1(string filename)
+        private static IEnumerable<string[]> ReadFile(string fileName)
         {
-            using (var stream = new StreamReader(filename))
+            using (var textReader = new StreamReader(fileName))
                 while (true)
                 {
-                    var str = stream.ReadLine();
-                    if (str == null) yield break;
-                    
-                    var line = str.Split(',');
-                    for (var j = 0; j < line.Length; j++)
-                        if (line[j] == "NA") line[j] = null;
-                    yield return line;
+                    var row = textReader.ReadLine();
+                    if (row == null) break;
+                    var values = row.Split(',');
+                    yield return values;
                 }
+        }
+
+        public static IEnumerable<string[]> ReadCsv1(string fileName)
+        {
+            foreach (var line in ReadFile(fileName))
+            {
+                for (var j = 0; j < line.Length; j++)
+                    if (line[j] == "NA") line[j] = null;
+                yield return line;
+            }
         }
 
         public static IEnumerable<T> ReadCsv2<T>(string filename) where T : new()
         {
             List<MemberInfo> members = new List<MemberInfo>();
-
-            using (var stream = new StreamReader(filename))
+            string[] columnNames = null;
+            foreach (var line in ReadFile(filename))
             {
-                
-                var tmp = stream.ReadLine()?.Replace("\"", "");//прочитали первую строку с названием столбцов
-                if(tmp==null) yield break;
-                
-                var columnNames = tmp.Split(',');
                 var type = typeof(T);
-                foreach (var column in columnNames)
+                if (columnNames == null)
                 {
-                    MemberInfo member = type.GetField(column, BindingFlags.NonPublic | BindingFlags.Instance);
-                    member = member ?? type.GetProperty(column, BindingFlags.NonPublic | BindingFlags.Instance);
-                    members.Add(member);
-                }
-
-                while (true)
-                {
-                    var line = stream.ReadLine();
-                    if (line == null) yield break;
-
-                    var result = new T();
-                    var values = line.Split(',');
-
-                    for (var i = 0; i < values.Length; ++i)
+                    columnNames = line;
+                    foreach (var column in columnNames)
                     {
-                        if (members[i] != null)
+                        MemberInfo member = type.GetField(column, BindingFlags.NonPublic | BindingFlags.Instance);
+                        member = member ?? type.GetProperty(column, BindingFlags.NonPublic | BindingFlags.Instance);
+                        members.Add(member);
+                    }
+                }
+                else
+                {
+                    var result = new T();
+                    for (var i = 0; i < line.Length; ++i)
+                    {
+                        if (members[i] == null) continue;
+                        if (members[i].MemberType == MemberTypes.Field)
                         {
-                            if (members[i].MemberType == MemberTypes.Field)
-                            {
-                                var member = (FieldInfo) members[i];
-                                member.SetValue(result, (T)setValue(values[i]));
-                            }
-                            if (members[i].MemberType == MemberTypes.Property)
-                            {
-                                var member = (PropertyInfo) members[i];
-                                member.SetValue(result, (T)setValue(values[i]));
-                            }
+                            var member = (FieldInfo) members[i];
+                            member.SetValue(result, (T) SetValue(line[i]));
+                        }
+                        if (members[i].MemberType == MemberTypes.Property)
+                        {
+                            var member = (PropertyInfo) members[i];
+                            member.SetValue(result, (T) SetValue(line[i]));
                         }
                     }
                     yield return result;
@@ -72,7 +70,7 @@ namespace ReadCsv
             }
         }
 
-        private static object setValue(string value)
+        private static object SetValue(string value)
         {
             if (value == "NA")
                 return null;
@@ -86,31 +84,41 @@ namespace ReadCsv
         }
 
         public static IEnumerable<Dictionary<string, object>> ReadCsv3(string filename)
-        {     
-            using (var stream = new StreamReader(filename))
+        {
+            string[] columnNames = null;
+            foreach (var line in ReadFile(filename))
             {
-                var tmp = stream.ReadLine()?.Replace("\"", "");
-                if(tmp==null) yield break;
-
-                var columnNames = tmp.Split(','); //прочитали первую строку с названием столбцов
-
-                while (true)
+                if (columnNames == null) columnNames = line;
+                else
                 {
-                    var line = stream.ReadLine();
-                    if (line == null) yield break;
-
                     var result = new Dictionary<string, object>();
-                   
-                    var values = line.Split(',');
-
-                    for (var i = 0; i < values.Length; ++i)
+                    for (var i = 0; i < line.Length; ++i)
                     {
-                        result[columnNames[i]] = setValue(values[i]);
+                        result[columnNames[i]] = SetValue(line[i]);
                     }
                     yield return result;
                 }
-            }   
+            }
         }
-       
+
+        public static IEnumerable<dynamic> ReadCsv4(string filename)
+        {
+            string[] columnNames = null;
+            foreach (var line in ReadFile(filename))
+            {
+                if (columnNames == null) columnNames = line;
+                else
+                {
+                    dynamic result = new ExpandoObject();
+                    IDictionary<string, dynamic> obj = result;
+
+                    for (var i = 0; i < line.Length; ++i)
+                    {
+                        obj.Add(columnNames[i], SetValue(line[i]));
+                    }
+                    yield return result;
+                }
+            }
+        }
     }
 }
